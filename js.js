@@ -110,6 +110,13 @@ btn.addEventListener('click', () => {
     img.classList.toggle('is-bright');
     navcon.classList.toggle('is-bright');
     btn.classList.toggle('is-bright');
+
+    if (btn.classList.contains('is-bright')){
+        btn.textContent = 'Тёмная тема';
+    } else{
+        btn.textContent = 'Светлая тема';
+    }
+    
     copy1.classList.toggle('is-bright');
     copy2.classList.toggle('is-bright');
     dialog.classList.toggle('is-bright');
