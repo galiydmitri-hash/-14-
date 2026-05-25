@@ -1,0 +1,94 @@
+:root {
+  --main-color: rgb(69, 69, 69);
+  --background-color: rgb(108, 108, 108);
+  --box-shadow-color: rgb(255, 255, 81);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden;
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(30, 30, 30);
+}
+
+.input1, .input2 {
+  font-family: "Nunito", sans-serif;
+  outline: none;
+  height: 100px;
+  width: 400px;
+  font-size: 35px;
+  font-weight: bolder;
+  border-radius: 15px;
+  border: 5px solid var(--main-color);
+  text-align: center;
+  color: var(--main-color);
+  margin-bottom: 20px;
+  background-color: var(--background-color);
+  transition: 0.25s;
+}
+.input1:hover, .input2:hover {
+  box-shadow: 0 0 10px 0 var(--box-shadow-color);
+}
+@media (max-width: 778px) {
+  .input1, .input2 {
+    height: 80px;
+    width: 350px;
+  }
+  .input1:hover, .input2:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+@media (max-width: 1024px) {
+  .input1:hover, .input2:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+.input2 {
+  color: var(--box-shadow-color);
+}
+
+.copy1, .copy2 {
+  position: absolute;
+  height: 50px;
+  width: 40px;
+  border-radius: 10px;
+  background-color: var(--box-shadow-color);
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.copy2 {
+  background-color: var(--background-color);
+  transform: translateX(25%) translateY(-35%);
+  transition: 0.5s;
+}
+
+.dialog {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  height: 75px;
+  width: 250px;
+  background-color: var(--background-color);
+  font-size: 25px;
+  font-weight: bolder;
+  color: rgb(79, 249, 27);
+  font-family: "Nunito", sans-serif;
+  transform: translateY(120%);
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}/*# sourceMappingURL=style.css.map */
