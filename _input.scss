@@ -13,6 +13,16 @@
     background-color: var(--background-color);
     transition: 0.25s;
 
+    &.is-bright{
+        background-color: var(--main-light-color);
+        border-color: var(--background-light-color);
+        color: white;
+
+        &:hover{
+            box-shadow: 0 0 10px 0 var(--box-shadow-blue-color);
+        }
+    }
+
     &:hover {
         box-shadow: 0 0 10px 0 var(--box-shadow-color);
     }
@@ -38,5 +48,13 @@
 
 .input2{
     @extend .input1;
-    color: var(--box-shadow-color);
+    &.is-bright{
+        color: white;
+        background-color: var(--main-light-color);
+        border-color: var(--background-light-color);
+
+        &:hover{
+            box-shadow: 0 0 10px 0 var(--box-shadow-blue-color);
+        }
+    }
 }

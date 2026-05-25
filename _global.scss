@@ -11,4 +11,8 @@ body {
     align-items: center;
     justify-content: center;
     background-color: rgb(30, 30, 30);
+
+    &.is-bright{
+        background-color: white;
+    }
 }

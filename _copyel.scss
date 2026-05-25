@@ -6,6 +6,10 @@
     background-color: var(--box-shadow-color);
     cursor: pointer;
     transition: 0.5s;
+
+    &.is-bright{
+        background-color: var(--box-shadow-blue-color);
+    }
 }
 
 .copy2{
@@ -13,6 +17,9 @@
     background-color: var(--background-color);
     transform: translateX(25%) translateY(-35%);
     transition: 0.5s;
+    &.is-bright{
+        background-color: var(--main-setting-color);
+    }
 }
 
 .dialog{
@@ -32,4 +39,9 @@
     font-family: 'Nunito', sans-serif;
     transform: translateY(120%);
     transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    &.is-bright{
+        background-color: var(--background-light-color);
+        color: white;
+    }
 }

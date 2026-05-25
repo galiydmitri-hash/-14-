@@ -90,3 +90,27 @@ copybtn.addEventListener('click', () => {
         dialog.style.transform = 'translateY(120%)';
     }, 5000);
 });
+
+const navcon = document.querySelector('.navcon');
+const navbar = document.querySelector('.navbar');
+const btn = document.querySelector('.btn');
+const img = document.querySelector('.imgset');
+const body = document.querySelector('body');
+
+navcon.addEventListener('click', () => {
+    img.classList.toggle('is-active');
+    navcon.classList.toggle('is-active')
+    navbar.classList.toggle('is-active');
+})
+
+btn.addEventListener('click', () => {
+    input1.classList.toggle('is-bright');
+    input2.classList.toggle('is-bright');
+    body.classList.toggle('is-bright');
+    img.classList.toggle('is-bright');
+    navcon.classList.toggle('is-bright');
+    btn.classList.toggle('is-bright');
+    copy1.classList.toggle('is-bright');
+    copy2.classList.toggle('is-bright');
+    dialog.classList.toggle('is-bright');
+})
