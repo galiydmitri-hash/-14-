@@ -1,7 +1,7 @@
 const input1 = document.querySelector('.input1');
 const input2 = document.querySelector('.input2');
 
-const WORKING_DAYS = 14;
+const WORKING_DAYS = 13;
 const SATURDAY = 6;
 const SUNDAY = 0;
 
