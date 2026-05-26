@@ -137,7 +137,6 @@ body.is-bright {
   border-radius: 30px;
   cursor: pointer;
   transition: width 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  z-index: 20;
 }
 .navcon.is-active {
   width: 500px;
@@ -166,6 +165,7 @@ body.is-bright {
   display: flex;
   align-items: center;
   justify-content: center;
+  list-style: none;
 }
 .navcon .navbar.is-active ul .btn, .navcon .navbar.is-active ul .btn2 {
   position: relative;

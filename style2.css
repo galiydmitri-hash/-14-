@@ -28,7 +28,7 @@ body.is-bright {
   background-color: white;
 }
 
-.app-wrapper {
+.user-list {
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 20px;
@@ -36,6 +36,7 @@ body.is-bright {
   min-height: auto;
   max-height: 2000px;
   margin: 0 auto;
+  justify-items: center;
 }
 
 .navcon {
@@ -51,7 +52,6 @@ body.is-bright {
   border-radius: 30px;
   cursor: pointer;
   transition: width 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  z-index: 20;
 }
 .navcon.is-active {
   width: 500px;
@@ -80,6 +80,7 @@ body.is-bright {
   display: flex;
   align-items: center;
   justify-content: center;
+  list-style: none;
 }
 .navcon .navbar.is-active ul .btn, .navcon .navbar.is-active ul .btn2 {
   position: relative;
@@ -171,6 +172,58 @@ body.is-bright {
 
 .inputcon:last-child {
   margin-bottom: 20px;
+}
+
+.searcharea {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  height: 50px;
+  width: 50px;
+  box-sizing: border-box;
+  border-radius: 50px;
+  background-color: var(--main-setting-color);
+  transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+}
+.searcharea.is-active {
+  width: 300px;
+}
+.searcharea .searchimg {
+  margin-left: 10px;
+}
+.searcharea .closeimg {
+  margin-right: 10px;
+}
+.searcharea .searchimg, .searcharea .closeimg {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.searcharea .search, .searcharea .closeimg {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+.searcharea .search.is-active, .searcharea .closeimg.is-active {
+  display: block;
+  opacity: 1;
+}
+.searcharea .search.is-active {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  padding: 0;
+  font-family: "Nunito", sans-serif;
+  font-weight: bolder;
 }
 
 .input {

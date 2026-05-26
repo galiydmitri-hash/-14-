@@ -9,146 +9,262 @@ const img = document.querySelector('.imgset');
 const body = document.body;
 const cute = document.querySelector('.cute');
 
+const searcharea = document.querySelector('.searcharea');
+const search = document.querySelector('.search');
+const closeImg = document.querySelector('.closeimg');
+const searchimg = document.querySelector('.searchimg');
+
+// ======================================================
+// LOCAL STORAGE
+// ======================================================
+
 let textList = JSON.parse(localStorage.getItem('savedTexts')) || [];
 
-// 1. Улучшенная функция переключения картинки
+// ======================================================
+// LIST.JS
+// ======================================================
+
+const options = {
+
+    valueNames: [
+        'taskid',
+        'inputtext'
+    ],
+
+    item: `
+        <li class="inputcon-item">
+
+            <p class="taskid" hidden></p>
+
+            <p class="inputtext"></p>
+
+            <div class="controlaria">
+
+                <img
+                    tabindex="0"
+                    src="Photo/Delete.webp"
+                    alt="Delete"
+                    class="delete"
+                    style="width:40px;height:40px;cursor:pointer;"
+                >
+
+                <img
+                    tabindex="0"
+                    src="Photo/Copy.webp"
+                    alt="Copy"
+                    class="copy"
+                    style="width:40px;height:40px;cursor:pointer;"
+                >
+
+            </div>
+
+        </li>
+    `
+};
+
+const userList = new List('users-list', options);
+
+// ======================================================
+// SAVE LOCAL STORAGE
+// ======================================================
+
+function saveLocalStorage() {
+
+    const updatedList = [];
+
+    userList.items.forEach(item => {
+
+        updatedList.push({
+            id: item.values().taskid,
+            text: item.values().inputtext
+        });
+    });
+
+    localStorage.setItem(
+        'savedTexts',
+        JSON.stringify(updatedList)
+    );
+}
+
+// ======================================================
+// PLACEHOLDER IMAGE
+// ======================================================
+
 function togglePlaceholderImage() {
-    if (!cute) return; // Защита от ошибок, если картинка не найдена
-    
-    if (inputcon.querySelectorAll('.inputcon-item').length > 0) {
-        cute.remove(); // Удаляем картинку, если карточки есть
+
+    if (!cute) return;
+
+    if (userList.items.length > 0) {
+
+        cute.style.display = 'none';
+
     } else {
-        // Добавляем картинку обратно, только если её ещё нет внутри контейнера
-        if (!inputcon.contains(cute)) {
-            inputcon.append(cute); 
-        }
+
+        cute.style.display = 'block';
     }
 }
 
-function createCard(textValue) {
-    const card = document.createElement('div');
-    card.classList.add('inputcon-item');
+// ======================================================
+// CARD EVENTS
+// ======================================================
+
+function attachCardEvents(item) {
+
+    const cardEl = item.elm;
+
+    const deleteImg = cardEl.querySelector('.delete');
+    const copyImg = cardEl.querySelector('.copy');
+    const inputtext = cardEl.querySelector('.inputtext');
+
+    // ==================================================
+    // LIGHT THEME
+    // ==================================================
 
     if (body.classList.contains('is-bright')) {
-        card.classList.add('is-bright');
+
+        cardEl.classList.add('is-bright');
+
+        inputtext?.classList.add('is-bright');
     }
 
-    const inputtext = document.createElement('p');
-    inputtext.classList.add('inputtext');
-    inputtext.textContent = textValue;
+    // ==================================================
+    // DELETE
+    // ==================================================
 
-    if (body.classList.contains('is-bright')) {
-        inputtext.classList.add('is-bright');
-    }
+    deleteImg?.addEventListener('click', () => {
 
-    const controlaria = document.createElement('div');
-    controlaria.classList.add('controlaria');
+        const currentId = item.values().taskid;
 
-    const deleteImg = document.createElement('img');
-    deleteImg.setAttribute('tabindex', '0');
-    deleteImg.src = 'Photo/Delete.webp';
-    deleteImg.alt = 'Delete';
-    deleteImg.classList.add('delete');
-    deleteImg.style.width = '40px';
-    deleteImg.style.height = '40px';
-    deleteImg.style.cursor = 'pointer';
+        userList.remove('taskid', currentId);
 
-    deleteImg.addEventListener('click', () => {
-        card.remove();
+        saveLocalStorage();
 
-        const index = textList.indexOf(textValue);
-        if (index !== -1) {
-            textList.splice(index, 1);
-        }
-        localStorage.setItem('savedTexts', JSON.stringify(textList));
-
-        // Проверяем состояние после удаления карточки
         togglePlaceholderImage();
     });
 
-    const copyImg = document.createElement('img');
-    copyImg.src = 'Photo/Copy.webp';
-    copyImg.alt = 'Copy';
-    copyImg.setAttribute('tabindex', '0');
-    copyImg.classList.add('copy');
-    copyImg.style.width = '40px';
-    copyImg.style.height = '40px';
-    copyImg.style.cursor = 'pointer';
+    // ==================================================
+    // COPY
+    // ==================================================
 
-    copyImg.addEventListener('click', async () => {
+    copyImg?.addEventListener('click', async () => {
+
         try {
-            await navigator.clipboard.writeText(textValue);
+
+            await navigator.clipboard.writeText(
+                item.values().inputtext
+            );
+
             copyImg.style.transform = 'scale(0.9)';
+
             setTimeout(() => {
+
                 copyImg.style.transform = 'scale(1)';
+
             }, 150);
+
         } catch (error) {
+
             console.error('Ошибка копирования:', error);
         }
     });
-
-    controlaria.append(deleteImg, copyImg);
-    card.append(inputtext, controlaria);
-
-    inputcon.prepend(card);
-
-    // Проверяем состояние после успешного добавления карточки
-    togglePlaceholderImage();
 }
 
-// =========================================================================
-// ЛОГИКА СТАРТА СТРАНИЦЫ (СТРОГИЙ ПОРЯДОК ВЫЗОВОВ)
-// =========================================================================
+// ======================================================
+// LOAD SAVED TASKS
+// ======================================================
 
-// Шаг 1: Отрисовываем старые карточки из LocalStorage (если они есть)
-textList.forEach(text => {
-    createCard(text);
-});
+if (textList.length > 0) {
 
-// Шаг 2: !!! ПЕРЕНЕСЛИ ВЫЗОВ СЮДА !!! 
-// Теперь проверка запускается строго ПОСЛЕ отрисовки всех карточек. Мигания не будет.
+    const reversedList = [...textList].reverse();
+
+    reversedList.forEach(task => {
+
+        const addedItems = userList.add({
+
+            taskid: task.id,
+            inputtext: task.text
+        });
+
+        attachCardEvents(addedItems[0]);
+    });
+}
+
 togglePlaceholderImage();
 
-// Шаг 3: Обработчик клика Enter
-input.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-        const textValue = input.value.trim();
-        if (textValue === '') return;
+// ======================================================
+// ADD TASK
+// ======================================================
 
-        textList.unshift(textValue); 
-        localStorage.setItem('savedTexts', JSON.stringify(textList));
-        
-        createCard(textValue); 
-        input.value = '';
+input?.addEventListener('keydown', (event) => {
+
+    if (event.key !== 'Enter') return;
+
+    const textValue = input.value.trim();
+
+    if (textValue === '') return;
+
+    const task = {
+
+        id: Date.now().toString(),
+        text: textValue
+    };
+
+    const addedItems = userList.add({
+
+        taskid: task.id,
+        inputtext: task.text
+    });
+
+    const newItem = addedItems[0];
+
+    // ==================================================
+    // PREPEND
+    // ==================================================
+
+    if (inputcon && newItem.elm) {
+
+        inputcon.prepend(newItem.elm);
     }
+
+    attachCardEvents(newItem);
+
+    saveLocalStorage();
+
+    input.value = '';
+
+    togglePlaceholderImage();
 });
 
-navcon.addEventListener('click', () => {
+// ======================================================
+// NAVBAR
+// ======================================================
 
-    img.classList.toggle('is-active');
+navcon?.addEventListener('click', () => {
+
+    img?.classList.toggle('is-active');
 
     navcon.classList.toggle('is-active');
 
-    navbar.classList.toggle('is-active');
+    navbar?.classList.toggle('is-active');
 });
 
-btn.addEventListener('click', () => {
+// ======================================================
+// THEME
+// ======================================================
+
+btn?.addEventListener('click', () => {
 
     body.classList.toggle('is-bright');
 
-    img.classList.toggle('is-bright');
+    img?.classList.toggle('is-bright');
 
-    navcon.classList.toggle('is-bright');
+    navcon?.classList.toggle('is-bright');
 
-    btn2.classList.toggle('is-bright');
+    btn2?.classList.toggle('is-bright');
 
     btn.classList.toggle('is-bright');
 
-    input.classList.toggle('is-bright');
-
-    // ======================
-    // UPDATE ALL CARDS
-    // ======================
+    input?.classList.toggle('is-bright');
 
     document.querySelectorAll('.inputcon-item')
         .forEach(el => {
@@ -173,4 +289,45 @@ btn.addEventListener('click', () => {
 
         btn.textContent = 'Светлая тема';
     }
+});
+
+// ======================================================
+// SEARCH OPEN
+// ======================================================
+
+searchimg?.addEventListener('click', () => {
+
+    searcharea?.classList.add('is-active');
+
+    search?.classList.add('is-active');
+
+    closeImg?.classList.add('is-active');
+
+    search?.focus();
+});
+
+// ======================================================
+// SEARCH CLOSE
+// ======================================================
+
+closeImg?.addEventListener('click', () => {
+
+    searcharea?.classList.remove('is-active');
+
+    search?.classList.remove('is-active');
+
+    closeImg?.classList.remove('is-active');
+
+    search.value = '';
+
+    userList.search();
+});
+
+// ======================================================
+// SEARCH INPUT
+// ======================================================
+
+search?.addEventListener('input', () => {
+
+    userList.search(search.value);
 });

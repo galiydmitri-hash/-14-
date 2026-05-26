@@ -16,24 +16,30 @@
 
         <nav class="navbar">
             <ul>
-                <button class="btn">Светлая тема
+                <li><button class="btn">Светлая тема
                     <div class="backgroundbtn"></div>
-                </button>
-                <a href="index.html" style="text-decoration: none; color: inherit;"><button class="btn2"> Главная</a>
-                    <div class="backgroundbtn"></div>
-                </button>
-                </a>
+                </button></li>
+                <li><a href="index.html" style="text-decoration: none; color: inherit;"><button class="btn2"> Главная</button></a></li>
             </ul>
         </nav>
     </div>
-
+    
     <input type="text" class="input">
-    <div class="app-wrapper">
-        <div class="inputcon"> 
+        <div id="users-list"> 
+
+            <div class="searcharea">
+                <img src="Photo/Search.svg" alt="Search" class="searchimg">
+                <input type="text" class="search" placeholder="Поиск...">
+                <img src="Photo/Close.webp" alt="Close" class="closeimg">
+            </div>
+
+            <ul class="inputcon list">
+            </ul>
+
             <img src="Photo/Cute.webp" alt="My close friend" class="cute" style="height: 200px; width: 200px; margin-top: 20px;">
         </div>
-    </div>
 
+    <script src="node_modules/list.js/dist/list.min.js"></script>
     <script src="js2.js"></script>
 </body>
 </html>

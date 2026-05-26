@@ -17,7 +17,7 @@ body {
     }
 }
 
-.app-wrapper{
+.user-list{
     display: grid;
     grid-template-columns: 1fr; 
     row-gap: 20px; 
@@ -25,4 +25,5 @@ body {
     min-height: auto;
     max-height: 2000px;
     margin: 0 auto;
+    justify-items: center; 
 }

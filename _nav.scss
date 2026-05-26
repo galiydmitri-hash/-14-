@@ -11,7 +11,6 @@
     border-radius: 30px;
     cursor: pointer;
     transition: width 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 20;
 
     &.is-active {
         width: 500px;
@@ -45,6 +44,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            list-style: none;
 
                 .btn, .btn2 {
                     position: relative;
