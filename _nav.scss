@@ -11,9 +11,10 @@
     border-radius: 30px;
     cursor: pointer;
     transition: width 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 20;
 
     &.is-active {
-        width: 250px;
+        width: 500px;
         justify-content: space-around;
     }
 
@@ -45,33 +46,78 @@
             align-items: center;
             justify-content: center;
 
-            .btn{
-                height: 40px;
-                width: auto;
-                padding:0 5px 0 5px;
-                background-color: var(--box-shadow-color);
-                border-radius: 5px;
-                font-family: 'Nunito', sans-serif;
-                font-size: 15px;
-                font-weight: bolder;
-                color: black;
-                cursor: pointer;
-                border: 0;
-                transition: 0.25s;
+                .btn, .btn2 {
+                    position: relative;
+                    overflow: hidden;
 
-                &.is-bright{
-                    background-color: var(--main-light-color);
-                    color: white;
+                    width: 100px;
+                    height: 40px;
 
-                    &:hover{
-                    background-color: var(--box-shadow-blue-color);
+                    border: none;
+                    border-radius: 5px;
+
+                    cursor: pointer;
+
+                    font-family: 'Nunito', sans-serif;
+                    font-size: 15px;
+                    font-weight: 700;
+
+                    background-color: var(--btn-bg);
+                    color: var(--btn-text);
+
+                    transition:
+                        background-color 0.25s,
+                        color 0.25s,
+                        transform 0.2s;
+
+                    isolation: isolate;
+
+                    // Анимированный слой
+                    &::before {
+                        content: '';
+
+                        position: absolute;
+                        inset: 0;
+
+                        width: 0;
+
+                        background-color: var(--btn-hover);
+
+                        transition: width 0.25s ease-in-out;
+
+                        z-index: -1;
+                    }
+
+                    &:hover::before {
+                        width: 100%;
+                    }
+
+                    &:active {
+                        transform: scale(0.97);
+                    }
+
+                    // Bright version
+                    &.is-bright {
+                        --btn-bg: var(--main-light-color);
+                        --btn-text: white;
+                        --btn-hover: var(--box-shadow-blue-color);
+                    }
+
+                    // Default version
+                    &:not(.is-bright) {
+                        --btn-bg: var(--box-shadow-color);
+                        --btn-text: black;
+                        --btn-hover: var(--box-shadow-light-color);
                     }
                 }
 
-                &:hover{
-                    background-color: var(--box-shadow-light-color);
+                .btn{
+                    margin-right: 30px;
                 }
-            }
+
+                .btn2{
+                    width: 170px;
+                }
         }
     }
 }

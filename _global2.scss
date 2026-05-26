@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    column-gap: 20px;
+    background-color: rgb(30, 30, 30);
+
+    &.is-bright{
+        background-color: white;
+    }
+}
+
+.app-wrapper{
+    display: grid;
+    grid-template-columns: 1fr; 
+    row-gap: 20px; 
+    max-width: 600px;
+    min-height: auto;
+    max-height: 2000px;
+    margin: 0 auto;
+}

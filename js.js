@@ -94,8 +94,10 @@ copybtn.addEventListener('click', () => {
 const navcon = document.querySelector('.navcon');
 const navbar = document.querySelector('.navbar');
 const btn = document.querySelector('.btn');
+const btn2 = document.querySelector('.btn2');
 const img = document.querySelector('.imgset');
 const body = document.querySelector('body');
+const backgroundbtn = document.querySelectorAll('.backgroundbtn')
 
 navcon.addEventListener('click', () => {
     img.classList.toggle('is-active');
@@ -109,7 +111,9 @@ btn.addEventListener('click', () => {
     body.classList.toggle('is-bright');
     img.classList.toggle('is-bright');
     navcon.classList.toggle('is-bright');
+    btn2.classList.toggle('is-bright');
     btn.classList.toggle('is-bright');
+    backgroundbtn.forEach(el => el.classList.toggle('is-bright'));
 
     if (btn.classList.contains('is-bright')){
         btn.textContent = 'Тёмная тема';
