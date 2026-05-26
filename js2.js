@@ -25,10 +25,6 @@ function togglePlaceholderImage() {
     }
 }
 
-// !!! УДАЛИЛИ ОТСЮДА СТАРЫЙ ВЫЗОВ togglePlaceholderImage(); !!!
-
-
-// --- 3. САМА ФУНКЦИЯ СОЗДАНИЯ КАРТОЧКИ ---
 function createCard(textValue) {
     const card = document.createElement('div');
     card.classList.add('inputcon-item');
@@ -49,6 +45,7 @@ function createCard(textValue) {
     controlaria.classList.add('controlaria');
 
     const deleteImg = document.createElement('img');
+    deleteImg.setAttribute('tabindex', '0');
     deleteImg.src = 'Photo/Delete.webp';
     deleteImg.alt = 'Delete';
     deleteImg.classList.add('delete');
@@ -72,6 +69,7 @@ function createCard(textValue) {
     const copyImg = document.createElement('img');
     copyImg.src = 'Photo/Copy.webp';
     copyImg.alt = 'Copy';
+    copyImg.setAttribute('tabindex', '0');
     copyImg.classList.add('copy');
     copyImg.style.width = '40px';
     copyImg.style.height = '40px';
