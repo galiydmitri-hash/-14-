@@ -1,4 +1,4 @@
-.navcon{
+.navcon {
     position: absolute;
     top: 30px;
     left: 30px;
@@ -15,9 +15,15 @@
     &.is-active {
         width: 500px;
         justify-content: space-around;
+
+        // Адаптив для самого контейнера меню
+        @media (max-width: 500px) {
+            width: calc(100% - 60px); // Занимает всю ширину экрана минус отступы по 30px слева/справа
+            max-width: 350px;
+        }
     }
 
-    &.is-bright{
+    &.is-bright {
         background-color: var(--main-setting-color);
     }
 
@@ -25,66 +31,59 @@
         transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         will-change: transform; 
         backface-visibility: hidden; 
+
+        &.is-active {
+            transform: rotate(180deg);
+        }
     }
 
-    .imgset.is-active {
-        transform: rotate(180deg);
-    }
-
-    .navbar{
+    .navbar {
         display: none;
-    }
 
-    .navbar.is-active{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        ul {
+        &.is-active {
             display: flex;
             align-items: center;
             justify-content: center;
-            list-style: none;
+
+            ul {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                list-style: none;
 
                 .btn, .btn2 {
                     position: relative;
                     overflow: hidden;
-
                     width: 100px;
                     height: 40px;
-
                     border: none;
                     border-radius: 5px;
-
                     cursor: pointer;
-
                     font-family: 'Nunito', sans-serif;
                     font-size: 15px;
                     font-weight: 700;
-
                     background-color: var(--btn-bg);
                     color: var(--btn-text);
-
                     transition:
                         background-color 0.25s,
                         color 0.25s,
-                        transform 0.2s;
-
+                        transform 0.2s,
+                        width 0.25s; // Добавлено для плавной адаптации ширины кнопок
                     isolation: isolate;
 
-                    // Анимированный слой
+                    // Адаптив для всех кнопок на мобильных экранах
+                    @media (max-width: 500px) {
+                        width: 80px;
+                        font-size: 10px;
+                    }
+
                     &::before {
                         content: '';
-
                         position: absolute;
                         inset: 0;
-
                         width: 0;
-
                         background-color: var(--btn-hover);
-
                         transition: width 0.25s ease-in-out;
-
                         z-index: -1;
                     }
 
@@ -96,14 +95,12 @@
                         transform: scale(0.97);
                     }
 
-                    // Bright version
                     &.is-bright {
                         --btn-bg: var(--main-light-color);
                         --btn-text: white;
                         --btn-hover: var(--box-shadow-blue-color);
                     }
 
-                    // Default version
                     &:not(.is-bright) {
                         --btn-bg: var(--box-shadow-color);
                         --btn-text: black;
@@ -111,13 +108,22 @@
                     }
                 }
 
-                .btn{
+                .btn {
                     margin-right: 30px;
+
+                    @media (max-width: 500px) {
+                        margin-right: 15px; // Уменьшаем отступ между кнопками на мобильных
+                    }
                 }
 
-                .btn2{
+                .btn2 {
                     width: 170px;
+                    
+                    @media (max-width: 500px) {
+                        width: 120px;
+                    }
                 }
+            }
         }
     }
 }

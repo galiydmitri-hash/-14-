@@ -16,6 +16,10 @@
     &:focus{
         width: 600px;
         box-shadow: 0 0 10px 0 var(--box-shadow-color);
+
+        @media (max-width: 500px) {
+            width: 400px;
+        }
     }
 
     &.is-bright{

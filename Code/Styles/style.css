@@ -142,6 +142,12 @@ body.is-bright {
   width: 500px;
   justify-content: space-around;
 }
+@media (max-width: 500px) {
+  .navcon.is-active {
+    width: calc(100% - 60px);
+    max-width: 350px;
+  }
+}
 .navcon.is-bright {
   background-color: var(--main-setting-color);
 }
@@ -180,8 +186,14 @@ body.is-bright {
   font-weight: 700;
   background-color: var(--btn-bg);
   color: var(--btn-text);
-  transition: background-color 0.25s, color 0.25s, transform 0.2s;
+  transition: background-color 0.25s, color 0.25s, transform 0.2s, width 0.25s;
   isolation: isolate;
+}
+@media (max-width: 500px) {
+  .navcon .navbar.is-active ul .btn, .navcon .navbar.is-active ul .btn2 {
+    width: 80px;
+    font-size: 10px;
+  }
 }
 .navcon .navbar.is-active ul .btn::before, .navcon .navbar.is-active ul .btn2::before {
   content: "";
@@ -211,6 +223,16 @@ body.is-bright {
 .navcon .navbar.is-active ul .btn {
   margin-right: 30px;
 }
+@media (max-width: 500px) {
+  .navcon .navbar.is-active ul .btn {
+    margin-right: 15px;
+  }
+}
 .navcon .navbar.is-active ul .btn2 {
   width: 170px;
+}
+@media (max-width: 500px) {
+  .navcon .navbar.is-active ul .btn2 {
+    width: 120px;
+  }
 }/*# sourceMappingURL=style.css.map */
