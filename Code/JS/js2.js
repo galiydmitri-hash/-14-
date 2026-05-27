@@ -42,7 +42,7 @@ const options = {
 
                 <img
                     tabindex="0"
-                    src="Photo/Delete.webp"
+                    src="Code/Photo/Delete.webp"
                     alt="Delete"
                     class="delete"
                     style="width:40px;height:40px;cursor:pointer;"
@@ -50,7 +50,7 @@ const options = {
 
                 <img
                     tabindex="0"
-                    src="Photo/Copy.webp"
+                    src="Code/Photo/Copy.webp"
                     alt="Copy"
                     class="copy"
                     style="width:40px;height:40px;cursor:pointer;"
